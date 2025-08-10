@@ -30,14 +30,14 @@ def download_file(url, filename=None):
 # ===== Load model dari Hugging Face =====
 @st.cache_resource(show_spinner=True)
 def load_model_from_hf():
-    hf_model_url = "https://huggingface.co/11amri/xgboostbank/main/bank_model.pkl"  # ganti dengan link file model kamu di HF
+    hf_model_url = "https://huggingface.co/11amri/xgboostbank/resolve/main/bank_model.pkl"  # ganti dengan link file model kamu di HF
     model_path = download_file(hf_model_url)
     return joblib.load(model_path)
 
 # ===== Load dataset dari Hugging Face =====
 @st.cache_data(show_spinner=True)
 def load_data_from_hf():
-    hf_data_url = "https://huggingface.co/datasets/11amri/banktrain/main/train.csv"  # ganti dengan link file csv kamu di HF
+    hf_data_url = "https://huggingface.co/datasets/11amri/banktrain/resolve/main/train.csv"  # ganti dengan link file csv kamu di HF
     csv_path = download_file(hf_data_url)
     return pd.read_csv(csv_path)
 
@@ -319,7 +319,7 @@ if menu == "Analysis":
 # ====== PREDICTION ======
 elif menu == "Prediction":
     st.title("🤖 Customer Prediction")
-    model = model.copy()  # pastikan model tidak berubah
+    model = model  # pastikan model tidak berubah
 
     st.markdown("Enter customer data (manually)")
 
@@ -381,3 +381,4 @@ elif menu == "Prediction":
             st.success(f"Prediction: {pred} (Probability: {prob:.2f})")
         else:
             st.success(f"Prediction: {pred}")
+
